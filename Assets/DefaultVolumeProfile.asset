@@ -15,10 +15,10 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 3
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.07
   response:
     m_OverrideState: 1
     m_Value: 0.8
@@ -117,7 +117,7 @@ MonoBehaviour:
     m_Value: 30
   gaussianMaxRadius:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.471
   highQualitySampling:
     m_OverrideState: 1
     m_Value: 0
@@ -738,7 +738,7 @@ MonoBehaviour:
     m_Value: 0
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 1, g: 0.9669811, b: 0.9669811, a: 1}
   hueShift:
     m_OverrideState: 1
     m_Value: 0

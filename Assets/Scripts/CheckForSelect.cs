@@ -9,11 +9,11 @@ public class CheckForSelect : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Agent e = hit.collider.gameObject.GetComponent<Agent>();
+            Unit e = hit.collider.gameObject.GetComponent<Unit>();
 
             if (e != null)
             {
-                e.I_Hover();
+                //e.I_Hover();
             }
         }
     }

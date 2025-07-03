@@ -5,17 +5,16 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private int cameraSpeed;
-    public Texture2D cursorTex;    
     private Vector3 cameraOffset;
+
+    private Player player;
     private Plyr_CamSnapIndicator snapIndicator;
-    void Awake() { 
-        Cursor.SetCursor(cursorTex, Vector2.zero, CursorMode.ForceSoftware);  
-    }
     void Start() {
         Cursor.lockState = CursorLockMode.Confined;
         cameraOffset = transform.position;
 
-        snapIndicator = GameObject.FindFirstObjectByType<Plyr_CamSnapIndicator>();
+        player = CommonAssets.i.Player;
+        snapIndicator = player.SnapIndicator;
     }
     void Update()
     {
@@ -46,7 +45,6 @@ public class CameraController : MonoBehaviour
 
     private void CheckSnapToPlayer() {
         if (Input.GetButton("SnapToPlayer")) {
-            GameObject player = GameObject.Find("Player");
             Vector3 position = player.transform.position + cameraOffset;
             position.y -= 1.5f;
             transform.position = position;

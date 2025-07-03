@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : Agent
+public class Enemy : Unit
 {
     protected override void Start()
     {

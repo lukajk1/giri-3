@@ -23,7 +23,6 @@ public class EscapeMenu : Menu
     void Update() {
         if (Input.GetButtonDown("Escape")) {
             TogglePause();
-            Debug.Log("this is running right");
         }
     }
     void ToMenu() {

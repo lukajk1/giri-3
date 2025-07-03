@@ -5,31 +5,20 @@ public class Plyr_AttackRangeIndicator : MonoBehaviour
     private MeshRenderer mr;
     private float _attackRange;
     private Vector3 originalValues;
-    public float Range
-    {
-        get => _attackRange;
-        set
-        {
-            if (_attackRange != value && value > 0)
-            {
-                _attackRange = value;
-                UpdateRange(value);
-            }
-        }
-    }
+    private Player player;
     private void Awake()
     {
         mr = GetComponent<MeshRenderer>();
-
         originalValues = transform.localScale;
     }
-    public void Init(float value)
+    public void Init(Player player)
     {
-        Range = value;
+        this.player = player;
     }
-    private void UpdateRange(float value)
+
+    private void UpdateRange()
     {
-        float tf = value * 2;
+        float tf = player.InstanceStats.currentAttackRange * 2;
         transform.localScale = new Vector3(tf, tf, originalValues.z);
     }
 
@@ -37,6 +26,7 @@ public class Plyr_AttackRangeIndicator : MonoBehaviour
     {
         if (Input.GetButton("ShowAttackRange"))
         {
+            UpdateRange();
             mr.enabled = true;
         }
         else mr.enabled = false;
