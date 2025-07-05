@@ -5,8 +5,9 @@ using System.Collections.Generic;
 /// <summary>
 /// The most general manager for a specific "run".
 /// </summary>
-public static class Run
+public class Run : MonoBehaviour
 {
+    #region properties
     private static float _timeScale = 1f;
     public static float TimeScale
     {
@@ -56,5 +57,11 @@ public static class Run
             Cursor.lockState = CursorLockMode.Confined;
         }
 
+    }
+    #endregion
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }

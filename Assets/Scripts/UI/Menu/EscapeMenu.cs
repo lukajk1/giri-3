@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class EscapeMenu : Menu
 {    
     [SerializeField] private Button backToGame;
-    [SerializeField] private Button quit;
     [SerializeField] private Button backToMenu;
+    [SerializeField] private Button quit;
 
     [SerializeField] private GameObject escMenu;
     void Start()
@@ -26,7 +26,7 @@ public class EscapeMenu : Menu
         }
     }
     void ToMenu() {
-
+        Game.i.LoadScene(Game.Scene.MainMenu);
     }
 
     void TogglePause() {

@@ -7,6 +7,11 @@ public class LowRes : MonoBehaviour
     private void Start()
     {
         SetLowRes(enable);
+
+        #if UNITY_EDITOR
+        #else
+            SetLowRes(true);
+        #endif
     }
 
     public void SetLowRes(bool value)
