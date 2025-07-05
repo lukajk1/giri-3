@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_VoronoiExp
+  m_Name: attackCursor
   m_Shader: {fileID: -6465566751694194690, guid: 33a76d71b8ca2bb42bf835d74b3a470c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,13 +38,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FresnelPow: 2.19
+    - _FresnelPow: 0.93
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScrollSpeed: 0.1
-    - _VoronoiScale: 8.03
+    - _ScrollSpeed: 0.14
+    - _VoronoiScale: 2.12
     m_Colors:
-    - _Color: {r: 0.3679245, g: 0.04338732, b: 0.04338732, a: 1}
+    - _Color: {r: 2.496673, g: 0.12954436, b: 0.19261357, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8317145649374627897

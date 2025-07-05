@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_VoronoiExp
-  m_Shader: {fileID: -6465566751694194690, guid: 33a76d71b8ca2bb42bf835d74b3a470c, type: 3}
+  m_Name: lightBelow
+  m_Shader: {fileID: -6465566751694194690, guid: a32d89900f8268b4e852bf42dfe0a83f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _SampleTexture2D_580763e6f0e0436399e7ce6dc1911073_Texture_1_Texture2D:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -38,16 +42,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FresnelPow: 2.19
+    - _Alpha: 0.113
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScrollSpeed: 0.1
-    - _VoronoiScale: 8.03
     m_Colors:
-    - _Color: {r: 0.3679245, g: 0.04338732, b: 0.04338732, a: 1}
+    - _Color: {r: 5.9668245, g: 5.082258, b: 4.475118, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &8317145649374627897
+--- !u!114 &4250427915375864391
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

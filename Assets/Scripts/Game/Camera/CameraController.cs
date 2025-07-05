@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     private Player player;
     private Plyr_CamSnapIndicator snapIndicator;
     void Start() {
-        Cursor.lockState = CursorLockMode.Confined;
         cameraOffset = transform.position;
 
         player = CommonAssets.i.Player;
@@ -18,7 +17,6 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        Cursor.lockState = CursorLockMode.Confined;
         UpdatePan();
         CheckSnapToPlayer();
     }
