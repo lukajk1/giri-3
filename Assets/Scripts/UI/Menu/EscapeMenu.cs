@@ -15,7 +15,7 @@ public class EscapeMenu : Menu
     {
         backToGame.onClick.AddListener(TogglePause);
         backToMenu.onClick.AddListener(ToMenu);
-        quit.onClick.AddListener(Application.Quit);
+        quit.onClick.AddListener(Quit);
 
         escMenu.SetActive(false);
     }
@@ -26,11 +26,17 @@ public class EscapeMenu : Menu
         }
     }
     void ToMenu() {
-        Game.i.LoadScene(Game.Scene.MainMenu);
+        Run.ChangeMenuCount(false, this);
+        Game.i.LoadScene(Game.SceneName.MainMenu);
     }
 
     void TogglePause() {
         escMenu.SetActive(!escMenu.activeSelf);
         Run.ChangeMenuCount(escMenu.activeSelf, this);
+    }
+
+    void Quit()
+    {
+        Game.i.Quit();
     }
 }

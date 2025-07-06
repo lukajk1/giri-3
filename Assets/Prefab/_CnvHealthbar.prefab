@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 54546668835600387}
   - component: {fileID: 3533441577295856743}
   m_Layer: 5
-  m_Name: Healthbar
+  m_Name: _CnvHealthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cafcdb9210a30ed4c8f2e6de0539bd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isChildToATransform: 1
 --- !u!223 &33317122042043655
 Canvas:
   m_ObjectHideFlags: 0
@@ -265,7 +266,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3533441577295856743
 MonoBehaviour:
   m_ObjectHideFlags: 0

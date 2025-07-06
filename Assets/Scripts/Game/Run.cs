@@ -22,7 +22,8 @@ public class Run : MonoBehaviour
         }
     }
 
-    private static float timeScaleValue = 1f;
+    private static float timeScaleBuffer = 1f;
+    #endregion
 
     private static List<Menu> OpenMenus = new();
     public static void ChangeMenuCount(bool isAddition, Menu menu)
@@ -47,18 +48,17 @@ public class Run : MonoBehaviour
     {
         if (value)
         {
-            timeScaleValue = TimeScale;
+            timeScaleBuffer = TimeScale;
             TimeScale = 0;
             Cursor.lockState = CursorLockMode.None;
         }
         else
         {
-            TimeScale = timeScaleValue;
+            TimeScale = timeScaleBuffer;
             Cursor.lockState = CursorLockMode.Confined;
         }
 
     }
-    #endregion
 
     private void Awake()
     {

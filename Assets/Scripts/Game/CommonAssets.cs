@@ -14,7 +14,7 @@ public class CommonAssets : MonoBehaviour
         else
         {
             Debug.LogError($"multiple {this} singletons found. (destroying extra)");
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         if (OutlineShader == null || 

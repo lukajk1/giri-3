@@ -14,12 +14,17 @@ public class MainMenu : Menu
     {
         play.onClick.AddListener(Play);
         options.onClick.AddListener(OpenOptions);
-        quit.onClick.AddListener(Application.Quit);
+        quit.onClick.AddListener(Quit);
     }
     private void Play() 
     {
-        Game.i.LoadScene(Game.Scene.Game);
+        Game.i.LoadScene(Game.SceneName.Game);
     }
 
     void OpenOptions() { }
+
+    void Quit()
+    {
+        Game.i.Quit();
+    }
 }

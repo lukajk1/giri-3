@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class Game : MonoBehaviour
 {
+    [SerializeField] private TransManager transition;
+    private float sceneTransitionDuration = 0.7f;
     public static Game i;
 
     // order matters here. The order corresponds to the build integer used by the build
-    public enum Scene
+    public enum SceneName
     {
         MainMenu,
         Game
@@ -22,15 +24,39 @@ public class Game : MonoBehaviour
         else
         {
             Debug.LogWarning($"multiple {this} singletons found. (destroying extra)");
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadScene(Scene scene)
+    private void Start()
     {
-        SceneManager.LoadSceneAsync((int)scene);
+        transition.Transition(TransManager.Type.BlackToScene, sceneTransitionDuration, null);
+    }
+
+    public void LoadScene(SceneName scene)
+    {
+        if ((int)scene == 0)
+            Cursor.lockState = CursorLockMode.None;
+
+        transition.Transition(TransManager.Type.SceneToBlack, sceneTransitionDuration, () =>
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadSceneAsync((int)scene);
+        });
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        transition.Transition(TransManager.Type.BlackToScene, sceneTransitionDuration);
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void Quit()
+    {
+
+        Application.Quit();
     }
 
 }
