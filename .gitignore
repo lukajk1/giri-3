@@ -1,4 +1,5 @@
-# ignore paid assets
+# ignore assets I don't potentially have rights to distribute
+/Assets/Sound/
 /Assets/Feel/
 
 *.ffs_db
