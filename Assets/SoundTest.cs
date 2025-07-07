@@ -6,7 +6,14 @@ public class SoundTest : MonoBehaviour
 
     private void Start()
     {
-        SoundData d = new SoundData(MusicList.i.mainMenu, Vector3.zero, 1f, SoundType.NonSpatial);
+        SoundData d = new()
+        {
+            clip = MusicList.i.mainMenu,
+            type = SoundType.NonSpatial,
+            isMusic = true,
+            varyPitch = false,
+            varyVolume = false
+        };
 
         SoundManagerSO.PlaySoundFXClip(d);
 
@@ -16,7 +23,11 @@ public class SoundTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            SoundData d = new SoundData(clip, Vector3.zero, 1f, SoundType.NonSpatial);
+            SoundData d = new()
+            {
+                clip = this.clip,
+                type = SoundType.NonSpatial,
+            };
 
             SoundManagerSO.PlaySoundFXClip(d);
         }

@@ -7,13 +7,15 @@ public class MainMenu : Menu
 {
 
     [SerializeField] private Button play;
-    [SerializeField] private Button options;
+    [SerializeField] private Button settings;
     [SerializeField] private Button quit;
+
+    [SerializeField] private GameObject settingsMenu; 
 
     void Awake() 
     {
         play.onClick.AddListener(Play);
-        options.onClick.AddListener(OpenOptions);
+        settings.onClick.AddListener(OpenOptions);
         quit.onClick.AddListener(Quit);
     }
     private void Play() 
@@ -21,7 +23,10 @@ public class MainMenu : Menu
         Game.i.LoadScene(Game.SceneName.Game);
     }
 
-    void OpenOptions() { }
+    void OpenOptions() 
+    { 
+        settingsMenu.SetActive(true);
+    }
 
     void Quit()
     {

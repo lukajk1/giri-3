@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class Game : MonoBehaviour
 {
-    [SerializeField] private TransManager transition;
+    [SerializeField] private TransitionManager transition;
     private float sceneTransitionDuration = 0.7f;
     public static Game i;
 
@@ -32,7 +32,9 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        transition.Transition(TransManager.Type.BlackToScene, sceneTransitionDuration, null);
+        SaveSystem.Load();
+
+        transition.Transition(TransitionManager.Type.BlackToScene, sceneTransitionDuration, null);
     }
 
     public void LoadScene(SceneName scene)
@@ -40,7 +42,7 @@ public class Game : MonoBehaviour
         if ((int)scene == 0)
             Cursor.lockState = CursorLockMode.None;
 
-        transition.Transition(TransManager.Type.SceneToBlack, sceneTransitionDuration, () =>
+        transition.Transition(TransitionManager.Type.SceneToBlack, sceneTransitionDuration, () =>
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadSceneAsync((int)scene);
@@ -49,7 +51,7 @@ public class Game : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        transition.Transition(TransManager.Type.BlackToScene, sceneTransitionDuration);
+        transition.Transition(TransitionManager.Type.BlackToScene, sceneTransitionDuration);
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -58,4 +60,12 @@ public class Game : MonoBehaviour
         Application.Quit();
     }
 
+}
+
+public enum Character
+{
+    Eivel,
+    Ava,
+    Vrail,
+    Cassian
 }

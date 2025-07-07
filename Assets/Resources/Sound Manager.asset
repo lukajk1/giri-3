@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Sound Manager
   m_EditorClassIdentifier: 
   SoundObject: {fileID: 7537207237685411264, guid: bef59c0923d0a77458adfefce27ff04b, type: 3}
+  SoundFXMixer: {fileID: -5038372886811399082, guid: 3f366f360c5393b4e9e619739e845c48, type: 2}
+  MusicMixer: {fileID: 5875794071276081679, guid: 3f366f360c5393b4e9e619739e845c48, type: 2}

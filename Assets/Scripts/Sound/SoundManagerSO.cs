@@ -20,6 +20,8 @@ public class SoundManagerSO : ScriptableObject
     }
 
     public AudioSource SoundObject;
+    public AudioMixerGroup SoundFXMixer;
+    public AudioMixerGroup MusicMixer;
 
     // prevent sounds from being too similar in playback
     private static float volumeVariance = 0.15f;
@@ -33,27 +35,41 @@ public class SoundManagerSO : ScriptableObject
             return;
         }
 
-        float randVolume = Random.Range(sound.volume - volumeVariance, sound.volume + volumeVariance);
-        float randPitch = Random.Range(1 - pitchVariance, 1 + pitchVariance);
+        AudioSource audioSource = Instantiate(i.SoundObject, sound.soundPos, Quaternion.identity);
 
-        AudioSource a = Instantiate(i.SoundObject, sound.soundPos, Quaternion.identity);
+
+
+        if (sound.varyVolume)
+        {
+            float randVolume = Random.Range(sound.volume - volumeVariance, sound.volume + volumeVariance);
+            audioSource.volume = randVolume;   
+        }
+
+        if (sound.varyPitch)
+        {
+            float randPitch = Random.Range(1 - pitchVariance, 1 + pitchVariance);
+            audioSource.pitch = randPitch;
+        }
+
+        audioSource.pitch *= Run.TimeScale;
 
         if (sound.type == SoundType.Spatial)
         {
-            a.spatialBlend = 1f;
-            a.minDistance = sound.minDist;
-            a.maxDistance = sound.maxDist;
+            audioSource.spatialBlend = 1f;
+            audioSource.minDistance = sound.minDist;
+            audioSource.maxDistance = sound.maxDist;
         }
         else
         {
-            a.spatialBlend = 0f; // ensure non-spatial if requested
+            audioSource.spatialBlend = 0f;
         }
 
-        a.clip = sound.clip;
-        a.volume = randVolume;
-        a.pitch = randPitch * Run.TimeScale;
-        a.loop = sound.isLooping;
-        a.Play();
+        if (sound.isMusic) audioSource.outputAudioMixerGroup = i.MusicMixer;
+        else audioSource.outputAudioMixerGroup = i.SoundFXMixer;
+
+        audioSource.clip = sound.clip;
+        audioSource.loop = sound.isLooping;
+        audioSource.Play();
     }
 
 }

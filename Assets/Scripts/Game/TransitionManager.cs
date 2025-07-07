@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
-public class TransManager : MonoBehaviour
+public class TransitionManager : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     [SerializeField] private Image image;
