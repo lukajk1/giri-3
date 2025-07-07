@@ -22,6 +22,7 @@ public partial class Player : Unit
     [SerializeField] private Plyr_AttackRangeIndicator attackRangeIndicator;
     [SerializeField] private Plyr_BasicAttack attack;
     [SerializeField] public Plyr_MovementAnimation Movement;
+    [SerializeField] public Plyr_Abilities Abilities;
     protected override void Start()
     {
         base.Start();
@@ -33,6 +34,7 @@ public partial class Player : Unit
         Movement.Init(this, animator);
         attack.Init(this, animator);
         attackRangeIndicator.Init(this);
+        Abilities.Init(this);
 
         // add arbitrary code bundle 
         GameObject child = Instantiate(Package.componentPackage);

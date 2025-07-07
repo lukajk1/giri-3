@@ -20,13 +20,6 @@ public class AbilityIcon : MonoBehaviour
     {
         icon.sprite = abilitySprite;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Activate(9f);
-        }
-    }
 
     public void Activate(float duration)
     {
@@ -34,6 +27,11 @@ public class AbilityIcon : MonoBehaviour
             StopCoroutine(cooldown);
 
         cooldown = StartCoroutine(RadialCountdown(duration));
+    }
+
+    public bool CooldownUp()
+    {
+        return cooldown == null;
     }
 
     private IEnumerator RadialCountdown(float duration)
@@ -61,6 +59,7 @@ public class AbilityIcon : MonoBehaviour
 
         radialFill.fillAmount = 0f;
         countdownText.text = "";
+        cooldown = null;
     }
 
 }
