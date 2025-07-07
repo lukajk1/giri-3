@@ -17,6 +17,7 @@ public class TracerManager : MonoBehaviour
         for (int j = 0; j < poolSize; j++)
         {
             AttackTracer tracer = Instantiate(tracerPrefab, Vector3.zero, Quaternion.identity);
+            tracer.gameObject.transform.parent = transform;
             pool.Enqueue(tracer);
         }
     }

@@ -18,7 +18,7 @@ public class Unit : Entity
 
     }
 
-    public void Damage(int damage) // change to a struct parameter at some point
+    public void Damage(DamageData damage) // change to a struct parameter at some point
     {
         InstanceStats.Damage(damage);
     }

@@ -34,12 +34,17 @@ public class AttackTracer : MonoBehaviour
             yield return null;
         }
 
-        FindFirstObjectByType<Dummy>().Damage(75);
+        DamageData dmg = new(75, transform.position);
+        FindFirstObjectByType<Dummy>().Damage(dmg);
+
+        SoundData sound = new(clip: EivelList.i.basicAttackHit_1);
+        SoundManagerSO.PlaySoundFXClip(sound);
+        
         gameObject.SetActive(false);
     }
 
     public void ResetPosition()
     {
-        transform.position = CommonAssets.i.Player.transform.position + new Vector3(0, 1.5f,0);
+        transform.position = CommonAssets.i.Player.transform.position + new Vector3(0, 1.5f, 0);
     }
 }

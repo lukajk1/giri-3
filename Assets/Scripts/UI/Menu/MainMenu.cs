@@ -20,12 +20,12 @@ public class MainMenu : Menu
     }
     private void Play() 
     {
-        Game.i.LoadScene(Game.SceneName.Game);
+        Game.i.LoadScene(GameScene.Game);
     }
 
     void OpenOptions() 
-    { 
-        settingsMenu.SetActive(true);
+    {
+        SettingsMenu.i.Open();
     }
 
     void Quit()

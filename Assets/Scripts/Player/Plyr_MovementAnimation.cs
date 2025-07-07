@@ -1,10 +1,11 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Plyr_MovementAnimation : Unit_Movement
 {
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private GameObject inWorldMoveCursor;
+    [SerializeField] private MoveCursor moveCursor;
     [HideInInspector] public Vector3 Destination;
 
     private NavMeshAgent agent;
@@ -30,18 +31,15 @@ public class Plyr_MovementAnimation : Unit_Movement
             UpdateMovement();
         }
 
-        //bool isWalking = Vector3.SqrMagnitude(inWorldMoveCursor.transform.position - transform.position) > 0.1f;
-        //animator.SetBool("IsWalking", isWalking);
     }
     private void UpdateMovement()
     {
         UpdateInWorldCursor();
-        //UnitLookAt(inWorldMoveCursor.transform.position);
 
         if (Input.GetKeyDown(KeyCode.X))
         {
             animator.SetTrigger("Idle");
-            inWorldMoveCursor.transform.position = transform.position;
+            moveCursor.MoveCommand(transform.position);
         }
     }
 
@@ -56,7 +54,7 @@ public class Plyr_MovementAnimation : Unit_Movement
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
             {
 
-                inWorldMoveCursor.transform.position = hit.point;
+                moveCursor.MoveCommand(hit.point);
                 WalkTo(hit.point);
             }
         }

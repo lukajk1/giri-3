@@ -16,8 +16,6 @@ public class SettingsMenu : Menu
 
     public static SettingsMenu i;
 
-    private const string SaveKey = "SettingsMenu"; // unique string key for saving
-
     void Awake()
     {
         if (i == null) i = this;
@@ -33,6 +31,12 @@ public class SettingsMenu : Menu
     {
         settingsMenu.SetActive(false);
     }
+
+    public void Open()
+    {
+        settingsMenu.SetActive(true);
+    }
+
 
     #region UI events
 
@@ -56,6 +60,7 @@ public class SettingsMenu : Menu
     }
     #endregion
 
+    #region Save, load
     public void Save(ref GameSettings data)
     {
         data = new GameSettings
@@ -88,8 +93,9 @@ public class GameSettings
 
     public GameSettings()
     {
-        MasterVolume = 1f;
-        SoundFxVolume = 1f;
-        MusicVolume = 1f;
+        MasterVolume = 0.5f;
+        SoundFxVolume = 0.5f;
+        MusicVolume = 0.5f;
     }
 }
+#endregion

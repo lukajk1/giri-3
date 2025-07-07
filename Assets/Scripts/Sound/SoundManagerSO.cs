@@ -35,9 +35,13 @@ public class SoundManagerSO : ScriptableObject
             return;
         }
 
+        if (sound.isMusic)
+        {
+            Game.i.PlayMusic(sound.clip);
+            return;
+        }
+
         AudioSource audioSource = Instantiate(i.SoundObject, sound.soundPos, Quaternion.identity);
-
-
 
         if (sound.varyVolume)
         {
@@ -63,10 +67,7 @@ public class SoundManagerSO : ScriptableObject
         {
             audioSource.spatialBlend = 0f;
         }
-
-        if (sound.isMusic) audioSource.outputAudioMixerGroup = i.MusicMixer;
-        else audioSource.outputAudioMixerGroup = i.SoundFXMixer;
-
+        audioSource.outputAudioMixerGroup = i.SoundFXMixer;
         audioSource.clip = sound.clip;
         audioSource.loop = sound.isLooping;
         audioSource.Play();

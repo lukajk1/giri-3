@@ -55,11 +55,13 @@ public class Unit_InstanceStats : MonoBehaviour
         currentCooldownReduction = baseStats.BaseCooldownReduction;
     }
 
-    public void Damage(int damage)
+    public void Damage(DamageData data)
     {
         if (currentDamage <= 0) return;
 
-        currentHealth -= damage;
+        currentHealth -= data.damage;
+
+        CombatEventBus.TriggerUnitHealthChange(data);
         healthbar.UpdateBar();
     }
     public void Heal(int heal)
@@ -73,6 +75,8 @@ public class Unit_InstanceStats : MonoBehaviour
         }
         else currentHealth = tentative;
 
+        SoundManagerSO.PlaySoundFXClip(new SoundData(CombatList.i.heal));
+        CombatEventBus.TriggerUnitHealthChange(new DamageData(-heal, transform.position));
         healthbar.UpdateBar();
     }
 

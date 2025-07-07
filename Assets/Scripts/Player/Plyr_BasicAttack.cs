@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Plyr_BasicAttack : MonoBehaviour
 {
+    [SerializeField] GameObject tracerPrefab;
+
     Player player;
     Animator animator;
     public void Init(Player player, Animator animator)
@@ -46,7 +48,11 @@ public class Plyr_BasicAttack : MonoBehaviour
     }
     private IEnumerator Fire()
     {
-        yield return new WaitForSeconds(0.416f / player.InstanceStats.currentAttackSpeed); // releases on frame 10 @ 24fps = 0.416s
+        yield return new WaitForSeconds(0.416f / player.InstanceStats.currentAttackSpeed); // releases on frame 10 @ 24fps = 0.416s. Scaled proportionally with attackspeed
+
         TracerManager.i.FireTracer(new Vector3(0, 1.5f, 0));
+
+        SoundData sound = new(clip: EivelList.i.basicAttack_1);
+        SoundManagerSO.PlaySoundFXClip(sound);
     }
 }

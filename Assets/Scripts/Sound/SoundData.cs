@@ -24,7 +24,7 @@ public struct SoundData
     public SoundData(
         AudioClip clip,
         Vector3? soundPos = null,
-        SoundType type = SoundType.Spatial,
+        SoundType type = SoundType.NonSpatial,
         float volume = 1f, // not sure if I even want this as an option.. better to normalize and bake it into the clip directly
         float minDist = 0f,
         float maxDist = 0f,
