@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ public class AttackTracer : MonoBehaviour
             yield return null;
         }
 
-        DamageData dmg = new(75, transform.position);
+        CombatData dmg = new(transform.position, CommonAssets.i.Player.currentDamage);
         FindFirstObjectByType<Dummy>().Damage(dmg);
 
         SoundData sound = new(clip: EivelList.i.basicAttackHit_1);

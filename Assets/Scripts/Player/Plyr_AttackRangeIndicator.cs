@@ -18,7 +18,7 @@ public class Plyr_AttackRangeIndicator : MonoBehaviour
 
     private void UpdateRange()
     {
-        float tf = player.InstanceStats.currentAttackRange * 2;
+        float tf = player.currentAttackRange * 2;
         transform.localScale = new Vector3(tf, tf, originalValues.z);
     }
 

@@ -20,7 +20,7 @@ public class CombatNumbersAnimator : MonoBehaviour
     {
         dmgText = GetComponent<TMP_Text>();
     }
-    public void Init(DamageData data)
+    public void Init(CombatData data)
     {
         height = Random.Range(8f, 12f);
 
@@ -35,10 +35,10 @@ public class CombatNumbersAnimator : MonoBehaviour
             dmgText.text = data.damage.ToString();
         }
         
-        if (data.damage < 0)
+        if (data.healing > 0)
         {
             startingColor = healColor;
-            dmgText.text = Mathf.Abs(data.damage).ToString();
+            dmgText.text = Mathf.Abs(data.healing).ToString();
         }
 
         StartCoroutine(FadeOutText());

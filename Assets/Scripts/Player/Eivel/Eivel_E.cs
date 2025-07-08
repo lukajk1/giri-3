@@ -6,7 +6,6 @@ public class Eivel_E : AbilityImplementation
     {
         if (UIAbility.CooldownUp())
         {
-            player.Damage(new DamageData(54, transform.position));
             UIAbility.Activate(BaseCooldown);
         }
         else

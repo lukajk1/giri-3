@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/Buff", fileName = "NewBuff")]
 public class BuffData : ScriptableObject
 {
+    public string debugName;
+
     public Sprite Icon;
     public GameObject CustomLogic;
 

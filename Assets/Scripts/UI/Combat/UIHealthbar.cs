@@ -2,25 +2,24 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthbarChange : MonoBehaviour
+public class UIHealthbar : MonoBehaviour
 {
     [SerializeField] protected Image healthbar;
     [SerializeField] protected Image whiteHealth;
 
     protected Coroutine lerpWhiteHealth;
     protected float tickdownSpeed = 0.35f;
+    private Unit unit;
 
-    private Unit_InstanceStats stats;
-
-    public void Init(Unit_InstanceStats stats)
+    public void Init(Unit unit)
     {
-        this.stats = stats;
+        this.unit = unit;
         healthbar.fillAmount = 1f;
         whiteHealth.fillAmount = 1f;
     }
-    public void UpdateBar()
+    public void RefreshHealthbar()
     {
-        healthbar.fillAmount = (float)stats.currentHealth / stats.currentMaxHealth; // cast to float to avoid int division
+        healthbar.fillAmount = (float)unit.currentHealth / unit.currentMaxHealth; // cast to float to avoid int division
 
         if (lerpWhiteHealth == null)
         {

@@ -21,7 +21,7 @@ public class Plyr_BasicAttack : MonoBehaviour
             animator.SetTrigger("Attack");
             player.Movement.Attack(Vector3.zero);
 
-            Collider[] colliders = Physics.OverlapSphere(player.transform.position, player.InstanceStats.currentAttackRange * 1.1f);
+            Collider[] colliders = Physics.OverlapSphere(player.transform.position, player.currentAttackRange * 1.1f);
 
             StartCoroutine(Fire());
 
@@ -48,7 +48,7 @@ public class Plyr_BasicAttack : MonoBehaviour
     }
     private IEnumerator Fire()
     {
-        yield return new WaitForSeconds(0.416f / player.InstanceStats.currentAttackSpeed); // releases on frame 10 @ 24fps = 0.416s. Scaled proportionally with attackspeed
+        yield return new WaitForSeconds(0.416f / player.currentAttackSpeed); // releases on frame 10 @ 24fps = 0.416s. Scaled proportionally with attackspeed
 
         TracerManager.i.FireTracer(new Vector3(0, 1.5f, 0));
 

@@ -22,7 +22,7 @@ public class CombatNumbersManager : MonoBehaviour
         CombatEventBus.OnUnitHealthChange -= ShowCombatNumber;
     }
 
-    private void ShowCombatNumber(DamageData data)
+    private void ShowCombatNumber(CombatData data)
     {
         Vector3 pos = data.pos + (-Vector3.Normalize(Camera.main.transform.forward) * 1.5f);
         GameObject canvas = Instantiate(CombatNumbersCanvas, pos, Quaternion.identity);

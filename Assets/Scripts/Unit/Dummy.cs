@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class Dummy : Unit
 {
-    protected void Start()
+    protected override void Start()
     {
-        InstanceStats.Init(this);
+        base.Start();
+
         StartCoroutine(AutoHealCoroutine());
     }
 
@@ -15,10 +16,10 @@ public class Dummy : Unit
         {
             yield return new WaitForSeconds(5f);
 
-            int missingHealth = InstanceStats.currentMaxHealth - InstanceStats.currentHealth;
+            int missingHealth = currentMaxHealth - currentHealth;
             if (missingHealth > 0)
             {
-                Heal(missingHealth);
+                Heal(new CombatData(transform.position, healing: missingHealth));
             }
         }
     }

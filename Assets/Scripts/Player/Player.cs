@@ -18,12 +18,11 @@ public partial class Player : Unit
     [SerializeField] private Plyr_BasicAttack attack;
     [SerializeField] public Plyr_MovementAnimation Movement;
     [SerializeField] public Plyr_Abilities Abilities;
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
+
         animator = GetComponent<Animator>(); 
-        
-        // initialized first so other components can use instance stats
-        InstanceStats.Init(this);
 
         Movement.Init(this, animator);
         attack.Init(this, animator);
@@ -37,7 +36,8 @@ public partial class Player : Unit
 
     public override void AddBuff(BuffData buff)
     {
-        Debug.Log("Buff was added in player");
+        base.AddBuff(buff);
+
         BuffManager.i.AddBuff(buff, BuffOnComplete); // pass oncomplete method as callback
     }
 

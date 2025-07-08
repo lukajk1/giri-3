@@ -16311,9 +16311,6 @@ PrefabInstance:
       addedObject: {fileID: 1801770826}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 963b23ecef8855d45aad2af7078cb7d3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1801770827}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 963b23ecef8855d45aad2af7078cb7d3, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1801770823}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 963b23ecef8855d45aad2af7078cb7d3, type: 3}
       insertIndex: -1
@@ -16406,24 +16403,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseStats: {fileID: 11400000, guid: eb6d921623554d74b989252e7b23d4c0, type: 2}
-  InstanceStats: {fileID: 1801770827}
-  SnapIndicator: {fileID: 101195398}
-  attackRangeIndicator: {fileID: 1181702936}
-  attack: {fileID: 336330533}
-  Movement: {fileID: 1801770823}
-  Abilities: {fileID: 536019558}
---- !u!114 &1801770827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801770820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5932b4896b84c43438224e333686c8bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   healthbar: {fileID: 1589402193}
   currentShield: 0
   currentHealth: 0
@@ -16434,8 +16413,11 @@ MonoBehaviour:
   currentCritChance: 0
   currentDamage: 0
   currentCooldownReduction: 0
-  effects: 
-  statMods: []
+  SnapIndicator: {fileID: 101195398}
+  attackRangeIndicator: {fileID: 1181702936}
+  attack: {fileID: 336330533}
+  Movement: {fileID: 1801770823}
+  Abilities: {fileID: 536019558}
 --- !u!1001 &1807557593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17394,7 +17376,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3053458131321036074}
   - component: {fileID: 7275435162277244676}
-  - component: {fileID: 7275435162277244677}
   - component: {fileID: 5074517547941315875}
   - component: {fileID: 2103958462414328097}
   - component: {fileID: 7275435162277244675}
@@ -17534,19 +17515,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseStats: {fileID: 11400000, guid: b336380e5afb7af49927752e44f1fe38, type: 2}
-  InstanceStats: {fileID: 7275435162277244677}
---- !u!114 &7275435162277244677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788099751946642872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5932b4896b84c43438224e333686c8bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   healthbar: {fileID: 8707077252297143370}
   currentShield: 0
   currentHealth: 0
@@ -17557,8 +17525,6 @@ MonoBehaviour:
   currentCritChance: 0
   currentDamage: 0
   currentCooldownReduction: 0
-  effects: 
-  statMods: []
 --- !u!1 &8121690725192100117
 GameObject:
   m_ObjectHideFlags: 0

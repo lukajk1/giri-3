@@ -15,7 +15,7 @@ public class Plyr_MovementAnimation : Unit_Movement
     {
         this.player = player;
         this.animator = animator;
-        agent.speed = player.InstanceStats.currentMoveSpeed;
+        agent.speed = player.currentMoveSpeed;
     }
     private void Awake()
     {

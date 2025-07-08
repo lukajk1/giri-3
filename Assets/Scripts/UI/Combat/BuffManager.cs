@@ -21,7 +21,6 @@ public class BuffManager : MonoBehaviour
     }
     public void AddBuff(BuffData buff, BuffCompleteDelegate callback)
     {
-        Debug.Log("buff manager called");
         GameObject newBuff = Instantiate(buffPrefab, buffHorizontalLayoutParent.transform);
         newBuff.GetComponent<BuffIcon>().Init(buff, callback);
         newBuff.SetActive(true);

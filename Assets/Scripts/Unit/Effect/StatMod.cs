@@ -9,6 +9,7 @@ public class StatMod
     public int ShieldFlat = 0;
     public int MaxHealthFlat = 0;
 
+    [Header("Combat")]
     public float AttackRangeFlat = 0;
     public float AttackSpeedMult = 1f;
     public float CritChanceFlat = 0;
