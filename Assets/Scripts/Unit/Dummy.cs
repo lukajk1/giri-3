@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Dummy : Unit
 {
-    protected override void Start()
+    protected void Start()
     {
         InstanceStats.Init(this);
         StartCoroutine(AutoHealCoroutine());

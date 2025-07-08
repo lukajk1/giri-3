@@ -1,19 +1,20 @@
 using UnityEngine;
 
+[System.Serializable]
 public class StatMod
 {
-    public int BonusMoveSpeedFlat = 0;
-    public float BonusMoveSpeedMult = 1f;
+    public int MoveSpeedFlat = 0;
+    public float MoveSpeedMult = 1f;
 
-    public int BonusShieldFlat = 0;
-    public int BonusMaxHealthFlat = 0;
+    public int ShieldFlat = 0;
+    public int MaxHealthFlat = 0;
 
-    public float BonusAttackRangeFlat = 0;
-    public float BonusAttackSpeedMult = 1f;
-    public float BonusCritChanceFlat = 0;
+    public float AttackRangeFlat = 0;
+    public float AttackSpeedMult = 1f;
+    public float CritChanceFlat = 0;
 
-    public int BonusDamageFlat = 0;
-    public float BonusDamageMult = 1f;
+    public int DamageFlat = 0;
+    public float DamageMult = 1f;
 
-    public float BonusCDR = 0f;
+    public float CDR = 0f;
 }

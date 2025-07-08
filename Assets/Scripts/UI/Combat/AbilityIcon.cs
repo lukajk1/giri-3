@@ -8,17 +8,19 @@ public class AbilityIcon : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private Image radialFill;
     [SerializeField] private TMP_Text countdownText;
+    [SerializeField] private TMP_Text textAbilityLabel;
     private Coroutine cooldown;
 
-
-    private void Start()
+    private void Awake()
     {
         countdownText.text = "";
         radialFill.fillAmount = 0f;
     }
-    public void Init(Sprite abilitySprite)
+    public void Init(Sprite abilitySprite, string label)
     {
         icon.sprite = abilitySprite;
+        radialFill.sprite = abilitySprite;
+        textAbilityLabel.text = label;
     }
 
     public void Activate(float duration)

@@ -4,12 +4,4 @@ public class Zombie : Enemy
 {
     private Plyr_MovementAnimation movement;
     public float movespeed;
-    protected override void Start()
-    {
-        base.Start();
-    }
-    protected override void Update()
-    {
-        base.Update();
-    }
 }

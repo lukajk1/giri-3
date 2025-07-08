@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Eivel_W : AbilityImplementation
+public class Eivel_Q : AbilityImplementation
 {
-    [SerializeField] BuffData WBuff;
+
     public override void TryActivate()
     {
         if (UIAbility.CooldownUp())
         {
-            player.AddBuff(WBuff);
+            player.Damage(new DamageData(54, transform.position));
             UIAbility.Activate(BaseCooldown);
         }
         else

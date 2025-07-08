@@ -98,15 +98,15 @@ public class Unit_InstanceStats : MonoBehaviour
 
         foreach (var mod in statMods)
         {
-            currentShield += mod.BonusShieldFlat;
-            currentMaxHealth += mod.BonusMaxHealthFlat;
-            currentMoveSpeed += mod.BonusMoveSpeedFlat;
-            moveSpeedMult *= mod.BonusMoveSpeedMult;
-            currentAttackRange += mod.BonusAttackRangeFlat;
-            currentCritChance += mod.BonusCritChanceFlat;
-            currentDamage += mod.BonusDamageFlat;
-            damageMult *= mod.BonusDamageMult;
-            currentCooldownReduction += mod.BonusCDR;
+            currentShield += mod.ShieldFlat;
+            currentMaxHealth += mod.MaxHealthFlat;
+            currentMoveSpeed += mod.MoveSpeedFlat;
+            moveSpeedMult *= mod.MoveSpeedMult;
+            currentAttackRange += mod.AttackRangeFlat;
+            currentCritChance += mod.CritChanceFlat;
+            currentDamage += mod.DamageFlat;
+            damageMult *= mod.DamageMult;
+            currentCooldownReduction += mod.CDR;
         }
 
         currentMoveSpeed *= moveSpeedMult;
