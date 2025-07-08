@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Unit_Movement : MonoBehaviour 
 {
-
     protected void UnitLookAt(Vector3 pos)
     {
         Vector3 direction = pos - transform.position;

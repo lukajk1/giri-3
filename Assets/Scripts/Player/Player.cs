@@ -16,7 +16,7 @@ public partial class Player : Unit
     [SerializeField] public Plyr_CamSnapIndicator SnapIndicator;
     [SerializeField] private Plyr_AttackRangeIndicator attackRangeIndicator;
     [SerializeField] private Plyr_BasicAttack attack;
-    [SerializeField] public Plyr_MovementAnimation Movement;
+    [SerializeField] public Plyr_MovementAndAnimation Movement;
     [SerializeField] public Plyr_Abilities Abilities;
     protected override void Start()
     {

@@ -8,7 +8,6 @@ using UnityEditor;
 /// <summary>
 /// The most general manager. All data that persists throughout runs (settings) runs through here.
 /// </summary>
-/// 
 
 # region Global Enums
 public enum Character

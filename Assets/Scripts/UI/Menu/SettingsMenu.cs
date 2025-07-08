@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsMenu : Menu
 {
+    [SerializeField] private GameObject settingsMenu;
     [SerializeField] private Button saveAndClose;
 
     [SerializeField] private Slider sliderMaster;
     [SerializeField] private Slider sliderSFX;
     [SerializeField] private Slider sliderMusic;
 
-    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private TMP_Dropdown windowType;
+    [SerializeField] private TMP_Dropdown resolution;
+
+    [SerializeField] private Toggle enableVSync;
+
 
     public static SettingsMenu i;
 
@@ -25,6 +31,11 @@ public class SettingsMenu : Menu
         sliderMaster.onValueChanged.AddListener(MasterChanged);
         sliderSFX.onValueChanged.AddListener(SFXChanged);
         sliderMusic.onValueChanged.AddListener(MusicChanged);
+
+        windowType.onValueChanged.AddListener(WindowTypeChanged);
+        resolution.onValueChanged.AddListener(ResolutionChanged);
+
+        enableVSync.onValueChanged.AddListener(VSyncChanged);
     }
 
     private void Start()
@@ -53,6 +64,62 @@ public class SettingsMenu : Menu
         SoundMixerManager.i.SetMusicVolume(value);
     }
 
+    private void WindowTypeChanged(int index)
+    {
+        FullScreenMode mode;
+
+        switch(index)
+        {
+            case 0:
+                mode = FullScreenMode.ExclusiveFullScreen;
+                break;
+            case 1: 
+                mode = FullScreenMode.FullScreenWindow;
+                break;
+            case 2:
+                mode = FullScreenMode.MaximizedWindow;
+                break;
+            case 3:
+                mode = FullScreenMode.Windowed;
+                break;
+            default:
+                mode = FullScreenMode.Windowed;
+                break;
+        }
+
+        Screen.fullScreenMode = mode;   
+    }
+    private void ResolutionChanged(int index)
+    {
+        (int width, int height) res;
+
+        switch (index)
+        {
+            case 0:
+                res = (2560, 1440);
+                break;
+            case 1:
+                res = (1920, 1080);
+                break;
+            case 2:
+                res = (1600, 900);
+                break;
+            case 3:
+                res = (1280, 720);
+                break;
+            default:
+                res = (1600, 900);
+                break;
+        }
+
+        Screen.SetResolution(res.width, res.height, Screen.fullScreenMode);
+
+    }
+    private void VSyncChanged(bool value)
+    {
+        QualitySettings.vSyncCount = value ? 1 : 0;
+    }
+
     private void SaveAndClose()
     {
         SaveSystem.Save();
@@ -67,7 +134,11 @@ public class SettingsMenu : Menu
         {
             MasterVolume = sliderMaster.value,
             SoundFxVolume = sliderSFX.value,
-            MusicVolume = sliderMusic.value
+            MusicVolume = sliderMusic.value,
+
+            WindowType = windowType.value,
+            Resolution = resolution.value,
+            VSync = enableVSync.isOn
         };
     }
 
@@ -76,9 +147,16 @@ public class SettingsMenu : Menu
         sliderMaster.value = data.MasterVolume;
         sliderSFX.value = data.SoundFxVolume;
         sliderMusic.value = data.MusicVolume;
+
+        windowType.value = data.WindowType;
+        resolution.value = data.Resolution;
+        enableVSync.isOn = data.VSync;
     }
 }
 
+/// <summary>
+/// Class, defined in SettingsMenu.cs
+/// </summary>
 
 [System.Serializable]
 public class GameSettings
@@ -88,14 +166,22 @@ public class GameSettings
     public float SoundFxVolume;
     public float MusicVolume;
 
-    // that's all I need for the moment? 
-    // guess I would have custom binds in here at some point. And every other setting obviously
+    public bool VSync;
 
+    // int type to use indices, just a bit easier
+    public int WindowType;
+    public int Resolution;
+
+    // constructor with default values
     public GameSettings()
     {
         MasterVolume = 0.5f;
         SoundFxVolume = 0.5f;
         MusicVolume = 0.5f;
+
+        VSync = false;
+        WindowType = 3;
+        Resolution = 2;
     }
 }
 #endregion

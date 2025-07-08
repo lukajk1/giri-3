@@ -2,7 +2,7 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Plyr_MovementAnimation : Unit_Movement
+public class Plyr_MovementAndAnimation : Unit_Movement
 {
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private MoveCursor moveCursor;
@@ -47,8 +47,16 @@ public class Plyr_MovementAnimation : Unit_Movement
     {
         if (Input.GetButton("MoveClick"))
         {
+            float scaleX = 1280f / Screen.width;
+            float scaleY = 720f / Screen.height;
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 scaledMousePos = new Vector3(
+                Input.mousePosition.x * scaleX,
+                Input.mousePosition.y * scaleY,
+                0f
+            );
+
+            Ray ray = Camera.main.ScreenPointToRay(scaledMousePos);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
