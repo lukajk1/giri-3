@@ -6,8 +6,10 @@ public delegate void BuffCompleteDelegate(BuffData buff);
 public class Unit : Entity
 {
     [SerializeField] public UnitBaseStats BaseStats;
-    [SerializeField] protected UIHealthbar healthbar;
-    [SerializeField] protected UnitController controller;
+    [SerializeField] public UIHealthbar healthbar;
+    [SerializeField] protected WitchController controller;
+
+    [HideInInspector] public bool Attackable = true;
 
     #region fields for stats
     [HideInInspector] public int currentShield;
@@ -28,7 +30,7 @@ public class Unit : Entity
     //private List<ItemData> itemList;  -> in the future probably use something like this to calculate items
 
     public Action OnStatsModified;
-    public Action OnDamageTaken;
+    public Action<CombatData> OnDamageTaken;
     public Action OnDeath;
     protected virtual void Start()
     {
@@ -71,6 +73,8 @@ public class Unit : Entity
         currentDamage = BaseStats.BaseDamage;
 
         currentCooldownReduction = BaseStats.BaseCooldownReduction;
+
+        OnStatsModified?.Invoke();
     }
     public void RefreshStats()
     {
@@ -78,6 +82,7 @@ public class Unit : Entity
 
         float moveSpeedMult = 1f;
         float damageMult = 1f;
+        float attackSpeedMult = 1f;
 
         foreach (BuffData buff in buffList)
         {
@@ -94,10 +99,12 @@ public class Unit : Entity
 
             moveSpeedMult *= buff.statMod.MoveSpeedMult;
             damageMult *= buff.statMod.DamageMult;
+            attackSpeedMult *= buff.statMod.AttackSpeedMult;
         }
 
         currentMoveSpeed *= moveSpeedMult;
         currentDamage = Mathf.RoundToInt(currentDamage * damageMult);
+        currentAttackSpeed *= attackSpeedMult;
 
         healthbar.RefreshHealthbar();
         OnStatsModified?.Invoke();
@@ -117,7 +124,7 @@ public class Unit : Entity
         }
         else
         {
-            OnDamageTaken?.Invoke();
+            OnDamageTaken?.Invoke(data);
         }
 
         CombatEventBus.TriggerUnitHealthChange(data);
@@ -142,6 +149,8 @@ public class Unit : Entity
     public void Die()
     {
         OnDeath?.Invoke();
+        Attackable = false;
+        SoundManagerSO.PlaySoundFXClip(new SoundData(CombatList.i.unitDeath));
     }
     #endregion
 }

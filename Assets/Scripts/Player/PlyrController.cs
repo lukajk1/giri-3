@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlyrController : UnitController
+public class PlyrController : WitchController
 {
 
 }

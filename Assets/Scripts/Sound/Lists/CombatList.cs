@@ -4,6 +4,7 @@ public class CombatList : MonoBehaviour
 {
 
     [SerializeField] public AudioClip heal;
+    [SerializeField] public AudioClip unitDeath;
 
     #region singleton pattern
     public static CombatList i;

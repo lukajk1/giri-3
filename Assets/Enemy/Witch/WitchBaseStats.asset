@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WitchBaseStats
   m_EditorClassIdentifier: 
   TurnSpeed: 0.2
-  BaseMoveSpeed: 0
+  BaseMoveSpeed: 1
   BaseMaxHealth: 450
   Shield: 0
   BaseAttackSpeed: 1

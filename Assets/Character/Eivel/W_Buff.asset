@@ -19,13 +19,13 @@ MonoBehaviour:
   Duration: 6
   statMod:
     MoveSpeedFlat: 0
-    MoveSpeedMult: 3
+    MoveSpeedMult: 1.3
     ShieldFlat: 0
     MaxHealthFlat: 0
     AttackRangeFlat: 3
-    AttackSpeedMult: 2.4
+    AttackSpeedMult: 1.8
     CritChanceFlat: 0
     DamageFlat: 0
-    DamageMult: 3
+    DamageMult: 1.15
     CDR: 0
   ccEffectsToApply: 0100000019000000

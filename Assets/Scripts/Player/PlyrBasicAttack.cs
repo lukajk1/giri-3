@@ -7,13 +7,18 @@ public class PlyrBasicAttack : MonoBehaviour
 {
     [SerializeField] GameObject tracerPrefab;
 
-    private Coroutine fire;
+    private const float attackReleaseFrameNumber = 9f; 
+    private float attackReleaseSeconds = 1f;
+
+    private Coroutine attackWindup;
     private Player player;
     private Animator animator;
     public void Init(Player player, Animator animator)
     {
         this.player = player;
         this.animator = animator;
+
+        attackReleaseSeconds = attackReleaseFrameNumber / 24f; // 24 = 24fps
     }
 
     void Update()
@@ -21,6 +26,12 @@ public class PlyrBasicAttack : MonoBehaviour
         if (Input.GetButtonDown("AttackMove"))
         {
             TryAttack();
+        }        
+
+        if (Input.GetButtonDown("MoveClick") && attackWindup != null)
+        {
+            StopCoroutine(attackWindup);
+            attackWindup = null;
         }
     }
 
@@ -30,7 +41,7 @@ public class PlyrBasicAttack : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(player.transform.position, player.currentAttackRange * 1.1f, layerMask);
 
         if (!RunUtilities.CursorToWorldPos(out Vector3 pointToCheckDistFrom)) return;
-        if (fire != null) return;
+        if (attackWindup != null) return;
 
         FindAnyObjectByType<AttackCursor>().MoveCommand(pointToCheckDistFrom);
 
@@ -39,7 +50,9 @@ public class PlyrBasicAttack : MonoBehaviour
 
         foreach (Collider col in colliders)
         {
-            if (col.GetComponent<Enemy>() == null) continue;
+            Enemy enemy = col.GetComponent<Enemy>();
+
+            if (enemy == null || !enemy.Attackable) continue;
 
             float dist = Vector3.Distance(col.transform.position, pointToCheckDistFrom);
             if (dist < closestDistance)
@@ -54,19 +67,19 @@ public class PlyrBasicAttack : MonoBehaviour
             animator.SetTrigger("Attack");
             player.Movement.Attack(closestEnemy.transform.position);
 
-            fire = StartCoroutine(Fire(closestEnemy));
+            attackWindup = StartCoroutine(Fire(closestEnemy));
         }
     }
 
     private IEnumerator Fire(Collider closestEnemy)
     {
-        yield return new WaitForSeconds(0.416f / player.currentAttackSpeed); // releases on frame 10 @ 24fps = 0.416s. Scaled proportionally with attackspeed
+        yield return new WaitForSeconds(attackReleaseSeconds / player.currentAttackSpeed); // scale with attackspeed
 
         TracerManager.i.FireTracer(closestEnemy.transform, closestEnemy.GetComponent<Enemy>());
 
-        SoundData sound = new(clip: EivelList.i.basicAttack_1);
+        SoundData sound = new(clip: EivelList.i.basicAttack_1, varyPitch: false);
         SoundManagerSO.PlaySoundFXClip(sound);
 
-        fire = null;
+        attackWindup = null;
     }
 }

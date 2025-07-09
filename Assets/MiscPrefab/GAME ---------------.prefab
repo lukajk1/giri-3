@@ -2830,6 +2830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: {fileID: 8300000, guid: 792e61c730548bd4ab3e7cf714926eaa, type: 3}
+  unitDeath: {fileID: 8300000, guid: 9615ba824ca16f54fb3e95c9986d02ef, type: 3}
 --- !u!1 &4040575651516576412
 GameObject:
   m_ObjectHideFlags: 0
@@ -3286,8 +3287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e2e4ea18746e745a1d12b42968820b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicAttack_1: {fileID: 8300000, guid: c8d30414f827b3c4d8033879ec906d3f, type: 3}
-  basicAttackHit_1: {fileID: 8300000, guid: c95eed95c0017aa43bdca29b2bb83001, type: 3}
+  basicAttack_1: {fileID: 8300000, guid: ffd307c589065cf45a89b1d6534b4641, type: 3}
+  basicAttackHit_1: {fileID: 8300000, guid: 6cb8db0335c3c004290ec2e6394f74d2, type: 3}
 --- !u!1 &4784153906899097794
 GameObject:
   m_ObjectHideFlags: 0
@@ -6306,7 +6307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: enable vSync
+  m_text: vSync
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: feae606d682fc1546abb10a37e0dcf53, type: 2}
   m_sharedMaterial: {fileID: 2676036274193206831, guid: feae606d682fc1546abb10a37e0dcf53, type: 2}

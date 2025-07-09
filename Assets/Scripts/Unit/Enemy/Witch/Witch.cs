@@ -11,9 +11,4 @@ public class Witch : Enemy
         agent = GetComponent<NavMeshAgent>();
         agent.speed = BaseStats.BaseMoveSpeed;
     }
-
-    private void Update()
-    {
-        agent.destination = CommonAssets.i.Player.transform.position;
-    }
 }

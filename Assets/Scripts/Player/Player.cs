@@ -17,7 +17,10 @@ public partial class Player : Unit
     [SerializeField] public PlyrAbilities Abilities;
     protected override void Start()
     {
-        base.Start();
+        // disabling base call for a bit to figure out state machine for witch case specifically
+        SetBaseStats();
+        healthbar.Init(this);
+        //base.Start();
 
         animator = GetComponent<Animator>(); 
 

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c99013f524bb34fbf7d0c6e0c9d89e, type: 3}
   m_Name: EivelBaseStats
   m_EditorClassIdentifier: 
-  TurnSpeed: 0.2
+  TurnSpeed: 0.15
   BaseMoveSpeed: 2.5
   BaseMaxHealth: 450
   Shield: 0
-  BaseAttackSpeed: 1
+  BaseAttackSpeed: 0.7
   BaseAttackRange: 5
   BaseCritChance: 0.05
   BaseDamage: 50
-  CooldownReduction: 1
+  BaseCooldownReduction: 1

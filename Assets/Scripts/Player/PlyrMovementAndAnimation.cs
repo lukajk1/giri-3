@@ -1,4 +1,4 @@
-using Unity.Burst.CompilerServices;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,18 +11,18 @@ public class PlyrMovementAndAnimation : Unit_Movement
     private NavMeshAgent agent;
     private Player player;
     private Animator animator;
+    private Coroutine turning;
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
     public void Init(Player player, Animator animator)
     {
         this.player = player;
         this.animator = animator;
-        agent.speed = player.currentMoveSpeed; 
+        agent.speed = player.currentMoveSpeed;
+        agent.updateRotation = false;
         player.OnStatsModified += UpdateStats;
-    }
-    private void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        if (agent == null) Debug.LogError("could not get navmeshagent from getcomponent");
-        //agent.updateRotation = false;
     }
     private void OnDisable()
     {
@@ -34,9 +34,10 @@ public class PlyrMovementAndAnimation : Unit_Movement
         animator.SetFloat("MoveSpeed", player.currentMoveSpeed / player.BaseStats.BaseMoveSpeed);
         agent.speed = player.currentMoveSpeed;
 
-        animator.SetFloat("AttackSpeed", player.currentAttackSpeed / player.BaseStats.BaseAttackSpeed);
+        animator.SetFloat("AttackSpeed", player.currentAttackSpeed);
 
-        Debug.Log(animator.GetFloat("testtsstts"+"MoveSpeed"));
+        //Debug.Log(animator.GetFloat("MoveSpeed"));
+        //Debug.Log(animator.GetFloat("AttackSpeed"));
     }
 
     private void Update()
@@ -51,10 +52,16 @@ public class PlyrMovementAndAnimation : Unit_Movement
     {
         UpdateInWorldCursor();
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X)) // stop key
         {
-            animator.SetTrigger("Idle");
-            moveCursor.MoveCommand(transform.position);
+            agent.SetDestination(transform.position);
+        }
+
+        //if (Vector3.Distance(moveCursor.transform.position, transform.position) < 0.1f) { }
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            animator.SetBool("IsMoving", false);
         }
     }
 
@@ -72,13 +79,41 @@ public class PlyrMovementAndAnimation : Unit_Movement
 
     public void WalkTo(Vector3 pos)
     {
-        animator.SetTrigger("Walk");
+        animator.SetBool("IsMoving", true);
         agent.SetDestination(pos);
+
+        // instant snap to new dir
+        //agent.transform.eulerAngles = new Vector3(0, Quaternion.LookRotation(agent.velocity).eulerAngles.y, 0);
+
+        if (turning != null)
+        {
+            StopCoroutine(turning);
+        }
+        Vector3 direction = (pos - transform.position);
+        turning = StartCoroutine(RotateToDirectionCR(direction));
     }
 
-    public void SetNavAgent(bool value)
+    private IEnumerator RotateToDirectionCR(Vector3 direction)
     {
-        agent.enabled = value;
+        direction.y = 0f;
+        if (direction == Vector3.zero) yield break;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        float turnSpeed = 180f / player.BaseStats.TurnSpeed; // degrees per second
+
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRotation,
+                turnSpeed * Time.deltaTime
+            );
+
+            yield return null;
+        }
+
+        transform.rotation = targetRotation;
+        turning = null;
     }
 
     public void Attack(Vector3 pos)
