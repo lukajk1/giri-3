@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     private Vector3 cameraOffset;
 
     private Player player;
-    private Plyr_CamSnapIndicator snapIndicator;
+    private PlyrCamSnapIndicator snapIndicator;
     void Start() {
         cameraOffset = transform.position;
 

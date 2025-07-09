@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class Unit : Entity
 {
     [SerializeField] public UnitBaseStats BaseStats;
     [SerializeField] protected UIHealthbar healthbar;
+    [SerializeField] protected UnitController controller;
 
     #region fields for stats
     [HideInInspector] public int currentShield;
@@ -24,10 +26,15 @@ public class Unit : Entity
 
     protected List<BuffData> buffList = new();
     //private List<ItemData> itemList;  -> in the future probably use something like this to calculate items
+
+    public Action OnStatsModified;
+    public Action OnDamageTaken;
+    public Action OnDeath;
     protected virtual void Start()
     {
         SetBaseStats();
         healthbar.Init(this);
+        controller.Init(this);
     }
 
     #region manage buffs
@@ -93,6 +100,7 @@ public class Unit : Entity
         currentDamage = Mathf.RoundToInt(currentDamage * damageMult);
 
         healthbar.RefreshHealthbar();
+        OnStatsModified?.Invoke();
     }
     #endregion
 
@@ -102,6 +110,15 @@ public class Unit : Entity
         if (currentDamage <= 0) return;
 
         currentHealth -= data.damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            OnDamageTaken?.Invoke();
+        }
 
         CombatEventBus.TriggerUnitHealthChange(data);
         healthbar.RefreshHealthbar();
@@ -120,6 +137,11 @@ public class Unit : Entity
         SoundManagerSO.PlaySoundFXClip(new SoundData(CombatList.i.heal));
         CombatEventBus.TriggerUnitHealthChange(data);
         healthbar.RefreshHealthbar();
+    }
+
+    public void Die()
+    {
+        OnDeath?.Invoke();
     }
     #endregion
 }

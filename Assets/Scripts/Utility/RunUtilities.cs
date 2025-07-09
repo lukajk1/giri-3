@@ -3,6 +3,8 @@ using UnityEngine;
 public class RunUtilities : MonoBehaviour
 {
     public static RunUtilities i;
+    public static Vector2 ScreenDownscaleSize = new Vector2(1280f, 720f);
+    //public static Vector2 ScreenDownscaleSize = new Vector2(1024f, 576f);
 
     public LayerMask groundLayer;
 
@@ -15,15 +17,30 @@ public class RunUtilities : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public Vector3 CursorToWorldPos()
+    public static bool CursorToWorldPos(out Vector3 worldPos)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float scaleX = ScreenDownscaleSize.x / Screen.width;
+        float scaleY = ScreenDownscaleSize.y / Screen.height;
+
+        Vector3 scaledMousePos = new Vector3(
+            Input.mousePosition.x * scaleX,
+            Input.mousePosition.y * scaleY,
+            0f
+        );
+
+        Ray ray = Camera.main.ScreenPointToRay(scaledMousePos);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+        int layerMask = 1 << 6;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
-            return hit.point;
+            worldPos = hit.point;
+            return true;
         }
-        else return Vector3.zero;
+        else
+        {
+            worldPos = Vector3.zero;
+            return false;
+        }
     }
 }

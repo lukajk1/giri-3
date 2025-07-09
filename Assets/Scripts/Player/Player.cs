@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using UnityEngine.Serialization;
-using UnityEngine.AI;
+using System;
 
 public partial class Player : Unit
 {
@@ -13,11 +10,11 @@ public partial class Player : Unit
     [HideInInspector] public Vector3 Destination { get => Movement.Destination; }
 
     [Header("Standard References")]
-    [SerializeField] public Plyr_CamSnapIndicator SnapIndicator;
-    [SerializeField] private Plyr_AttackRangeIndicator attackRangeIndicator;
-    [SerializeField] private Plyr_BasicAttack attack;
-    [SerializeField] public Plyr_MovementAndAnimation Movement;
-    [SerializeField] public Plyr_Abilities Abilities;
+    [SerializeField] public PlyrCamSnapIndicator SnapIndicator;
+    [SerializeField] private PlyrAttackRangeIndicator attackRangeIndicator;
+    [SerializeField] private PlyrBasicAttack attack;
+    [SerializeField] public PlyrMovementAndAnimation Movement;
+    [SerializeField] public PlyrAbilities Abilities;
     protected override void Start()
     {
         base.Start();
@@ -40,5 +37,4 @@ public partial class Player : Unit
 
         BuffManager.i.AddBuff(buff, BuffOnComplete); // pass oncomplete method as callback
     }
-
 }
