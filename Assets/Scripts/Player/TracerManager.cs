@@ -22,12 +22,12 @@ public class TracerManager : MonoBehaviour
         }
     }
 
-    public void FireTracer(Transform target, Enemy enemyToDamage)
+    public void FireTracer(CombatData data)
     {
         AttackTracer tracer = pool.Dequeue();
 
         tracer.gameObject.SetActive(true);
-        tracer.Shoot(target, enemyToDamage);
+        tracer.Init(data);
         pool.Enqueue(tracer);
     }
 }

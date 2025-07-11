@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 public class PlyrBasicAttack : MonoBehaviour
 {
@@ -72,9 +71,10 @@ public class PlyrBasicAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(RunUtil.AnimFramesToSecs(attackReleaseFrameNum) / player.currentAttackSpeed); // scale with attackspeed
 
-        TracerManager.i.FireTracer(closestEnemy.transform, closestEnemy.GetComponent<Enemy>());
+        CombatData data = new(player, closestEnemy.GetComponent<Enemy>(), closestEnemy.transform.position, damage: player.currentDamage);
+        TracerManager.i.FireTracer(data);
 
-        SoundData sound = new(clip: EivelList.i.basicAttack_1, varyPitch: false);
+        SoundData sound = new(clip: EivelList.i.basicAttack_1);
         SoundManagerSO.PlaySoundFXClip(sound);
 
         attackWindup = null;

@@ -26,7 +26,7 @@ public class WitchController : EnemyController
         moveState.Init(this);
         idleState.Init(this);
     }
-    public virtual void Init(Unit unit)
+    public override void Init(Unit unit)
     {
         this.unit = unit; 
         

@@ -49,16 +49,21 @@ public class RunUtil : MonoBehaviour
 
     public static bool CursorToWorldPos(out Vector3 worldPos)
     {
-        float scaleX = ScreenDownscaleSize.x / Screen.width;
-        float scaleY = ScreenDownscaleSize.y / Screen.height;
+        Vector3 mousePos = Input.mousePosition;
 
-        Vector3 scaledMousePos = new Vector3(
-            Input.mousePosition.x * scaleX,
-            Input.mousePosition.y * scaleY,
-            0f
-        );
+        if (Game.PixellateOn)
+        {
+            float scaleX = ScreenDownscaleSize.x / Screen.width;
+            float scaleY = ScreenDownscaleSize.y / Screen.height;
 
-        Ray ray = Camera.main.ScreenPointToRay(scaledMousePos);
+            mousePos = new Vector3(
+                mousePos.x * scaleX,
+                mousePos.y * scaleY,
+                0f
+            );
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
 
         int layerMask = 1 << 6;
@@ -73,4 +78,5 @@ public class RunUtil : MonoBehaviour
             return false;
         }
     }
+
 }

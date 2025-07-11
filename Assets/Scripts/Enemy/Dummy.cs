@@ -19,7 +19,7 @@ public class Dummy : Enemy
             int missingHealth = currentMaxHealth - currentHealth;
             if (missingHealth > 0)
             {
-                Heal(new CombatData(transform.position, healing: missingHealth));
+                Heal(new CombatData(this, this, transform.position, healing: missingHealth));
             }
         }
     }

@@ -14,12 +14,12 @@ public class CombatNumbersManager : MonoBehaviour
 
     private void OnEnable()
     {
-        CombatEventBus.OnUnitHealthChange += ShowCombatNumber;
+        CombatEventBus.OnCombatDataResolved += ShowCombatNumber;
     }
 
     private void OnDisable()
     {
-        CombatEventBus.OnUnitHealthChange -= ShowCombatNumber;
+        CombatEventBus.OnCombatDataResolved -= ShowCombatNumber;
     }
 
     private void ShowCombatNumber(CombatData data)

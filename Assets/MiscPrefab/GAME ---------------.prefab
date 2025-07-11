@@ -3532,7 +3532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e2e4ea18746e745a1d12b42968820b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicAttack_1: {fileID: 8300000, guid: ffd307c589065cf45a89b1d6534b4641, type: 3}
+  basicAttack_1: {fileID: 8300000, guid: 4a58b633cad9d464b9c0d180f41dd7f8, type: 3}
   basicAttackHit_1: {fileID: 8300000, guid: 09d1ab01d4d57024a86f8dd1461be60c, type: 3}
 --- !u!1 &4784153906899097794
 GameObject:
@@ -5467,7 +5467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3e8560c2d80d442af3f0768e7dbf0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownNotUp: {fileID: 8300000, guid: 401bdd21a500e5d478ebd8002cbaf2ef, type: 3}
+  cooldownNotUp: {fileID: 8300000, guid: fc4a1575f3bed2e40af9d284c983c8fe, type: 3}
 --- !u!1 &6534870584138466092
 GameObject:
   m_ObjectHideFlags: 0

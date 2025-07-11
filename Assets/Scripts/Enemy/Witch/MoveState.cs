@@ -21,7 +21,13 @@ public class MoveState : MonoBehaviour, IState
 
     public void Tick()
     {
+        float distFromPlayer = Vector3.Distance(CommonAssets.i.Player.transform.position, unit.transform.position);
+
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            controller.ChangeState(controller.idleState);
+        }
+        else if (distFromPlayer >= IdleState.prefRange)
         {
             controller.ChangeState(controller.idleState);
         }

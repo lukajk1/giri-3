@@ -20,7 +20,7 @@ public class BuffData : ScriptableObject
 public enum CCState
 {
     Unseen = 1,
-    Exposed = 5, // visible regardless of LOS. May not keep in
+    Exposed = 5, // visible regardless of LOS. possibly drop
     Disarmed = 10,
     Rooted = 15,
     Stunned = 20,

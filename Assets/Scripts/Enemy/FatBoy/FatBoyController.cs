@@ -3,13 +3,14 @@ using UnityEngine.AI;
 
 public class FatBoyController : EnemyController 
 {
-    private void Start()
+    private void Awake()
     {
-        navAgent = GetComponent<NavMeshAgent>();
         currentState = new EmptyState(this);
     }
 
-    protected virtual void Update()
+    public override void Init(Unit unit) { }
+
+    protected override void Update()
     {
         base.Update();
 
@@ -18,10 +19,6 @@ public class FatBoyController : EnemyController
         if (NavMesh.SamplePosition(playerPos, out hit, 3.0f, NavMesh.AllAreas))
         {
             navAgent.destination = hit.position;
-        }
-        else
-        {
-            // Optional fallback behavior if no position is found near the player
         }
     }
 }

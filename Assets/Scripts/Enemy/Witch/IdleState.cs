@@ -8,8 +8,8 @@ public class IdleState : MonoBehaviour, IState
     private Unit unit;
     private WitchController controller;
 
-    private float panicRange = 5f; // if player within this range run!
-    private float prefRange = 7f; 
+    public const float panicRange = 5f; // if player within this range run!
+    public const float prefRange = 7f; 
     public void Init(WitchController controller)
     {
         this.unit = controller.unit;

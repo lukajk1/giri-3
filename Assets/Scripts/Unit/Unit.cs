@@ -7,7 +7,7 @@ public class Unit : Entity
 {
     [SerializeField] public UnitBaseStats BaseStats;
     [SerializeField] public UIHealthbar healthbar;
-    [SerializeField] protected WitchController controller;
+    [SerializeField] protected UnitController controller;
 
     [HideInInspector] public bool Attackable = true;
     [HideInInspector] public bool IsDead;
@@ -47,6 +47,10 @@ public class Unit : Entity
         RefreshStats();
     }
 
+    /// <summary>
+    /// callback method to remove a buff from the unit's list of active buffs once the duration has expired
+    /// </summary>
+    /// <param name="buff"></param>
     public void BuffOnComplete(BuffData buff)
     {
         if (buffList.Contains(buff)) // should never be false but you never know
@@ -92,6 +96,7 @@ public class Unit : Entity
 
             currentMoveSpeed += buff.statMod.MoveSpeedFlat;
 
+            currentAttackSpeed += buff.statMod.AttackSpeedFlat;
             currentAttackRange += buff.statMod.AttackRangeFlat;
             currentCritChance += buff.statMod.CritChanceFlat;
             currentDamage += buff.statMod.DamageFlat;
@@ -128,7 +133,7 @@ public class Unit : Entity
             OnDamageTaken?.Invoke(data);
         }
 
-        CombatEventBus.TriggerUnitHealthChange(data);
+        CombatEventBus.TriggerCombatDataResolved(data);
         healthbar.RefreshHealthbar();
     }
     public virtual void Heal(CombatData data)
@@ -143,7 +148,7 @@ public class Unit : Entity
         else currentHealth = tentative;
 
         SoundManagerSO.PlaySoundFXClip(new SoundData(CombatList.i.heal));
-        CombatEventBus.TriggerUnitHealthChange(data);
+        CombatEventBus.TriggerCombatDataResolved(data);
         healthbar.RefreshHealthbar();
     }
 

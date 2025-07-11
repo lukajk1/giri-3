@@ -30,6 +30,8 @@ public class Game : MonoBehaviour
     [SerializeField] private AudioSource musicAudioSource;
     private float sceneTransitionDuration = 0.7f;
 
+    public static bool PixellateOn;
+
     // order matters here. The order corresponds to the build integer used by the build
     #region singleton, DDOL
     public static Game i;

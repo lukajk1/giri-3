@@ -3,15 +3,18 @@ using UnityEngine;
 [System.Serializable]
 public class StatMod
 {
-    public int MoveSpeedFlat = 0;
-    public float MoveSpeedMult = 1f;
+    [Tooltip("additional unity units / sec")] public float MoveSpeedFlat = 0;
+    [Tooltip("1.4 = 40% extra, etc.")] public float MoveSpeedMult = 1f;
 
     public int ShieldFlat = 0;
     public int MaxHealthFlat = 0;
 
     [Header("Combat")]
     public float AttackRangeFlat = 0;
+
+    [Tooltip("attacks per second")] public float AttackSpeedFlat = 0f;
     public float AttackSpeedMult = 1f;
+
     public float CritChanceFlat = 0;
 
     public int DamageFlat = 0;

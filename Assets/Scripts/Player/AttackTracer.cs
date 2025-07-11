@@ -7,7 +7,8 @@ public class AttackTracer : MonoBehaviour
 {
     TrailRenderer trail;
     float speed = 20f;
-    Enemy enemyToDamage;
+    Unit targetUnit;
+    CombatData data;
 
     void Start()
     {
@@ -15,14 +16,16 @@ public class AttackTracer : MonoBehaviour
         trail.enabled = false;
     }
 
-    public void Shoot(Transform target, Enemy enemyToDamage)
+    public void Init(CombatData data)
     {
-        this.enemyToDamage = enemyToDamage;
+        this.targetUnit = data.targetUnit;
+        this.data = data;
+
         trail.enabled = true;
-        StartCoroutine(ShootingCR(target));
+        StartCoroutine(ShootingCR(data.pos));
     }
 
-    IEnumerator ShootingCR(Transform target)
+    IEnumerator ShootingCR(Vector3 pos)
     {
         trail.enabled = false;
         ResetPosition();
@@ -30,17 +33,16 @@ public class AttackTracer : MonoBehaviour
 
         yield return null;
 
-        while (target != null && Vector3.SqrMagnitude(target.position - transform.position) > 0.1f)
+        while (Vector3.SqrMagnitude(pos - transform.position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, pos, speed * Time.deltaTime);
             yield return null;
         }
 
         // null check before applying damage
-        if (target != null)
+        if (targetUnit != null)
         {
-            CombatData dmg = new(target.position, CommonAssets.i.Player.currentDamage);
-            enemyToDamage.Damage(dmg);
+            targetUnit.Damage(data);
             SoundData sound = new(clip: EivelList.i.basicAttackHit_1);
             SoundManagerSO.PlaySoundFXClip(sound);
         }

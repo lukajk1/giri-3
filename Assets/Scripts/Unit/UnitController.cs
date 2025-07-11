@@ -1,3 +1,6 @@
 using UnityEngine;
 
-public class UnitController : MonoBehaviour { }
+public abstract class UnitController : MonoBehaviour 
+{ 
+    public virtual void Init(Unit unit) { }
+}

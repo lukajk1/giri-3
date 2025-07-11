@@ -123,7 +123,8 @@ public class SettingsMenu : Menu
     }
     private void PixellateChanged(bool value)
     {
-        LowRes.i.SetLowRes(value);
+        Game.PixellateOn = value;
+        if (LowRes.i != null) LowRes.i.SetLowRes(value);
     }
 
     private void SaveAndClose()
