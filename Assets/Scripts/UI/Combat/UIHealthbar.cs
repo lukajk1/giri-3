@@ -19,6 +19,8 @@ public class UIHealthbar : MonoBehaviour
     }
     public void RefreshHealthbar()
     {
+        if (!gameObject.activeSelf) return;
+
         healthbar.fillAmount = (float)unit.currentHealth / unit.currentMaxHealth; // cast to float to avoid int division
 
         if (lerpWhiteHealth == null)

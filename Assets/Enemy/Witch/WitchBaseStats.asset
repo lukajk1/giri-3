@@ -17,7 +17,7 @@ MonoBehaviour:
   BaseMaxHealth: 450
   Shield: 0
   BaseAttackSpeed: 1
-  BaseAttackRange: 5
+  BaseAttackRange: 9
   BaseCritChance: 0.05
   BaseDamage: 50
   BaseCooldownReduction: 1

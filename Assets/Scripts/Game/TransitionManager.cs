@@ -49,7 +49,7 @@ public class TransitionManager : MonoBehaviour
         canvas.gameObject.SetActive(true);
 
         Color color = image.color;
-        float timer = 0f;
+        float elapsed = 0f;
 
         float startAlpha = (type == Type.SceneToBlack) ? 0f : 1f;
         float endAlpha = (type == Type.SceneToBlack) ? 1f : 0f;
@@ -57,10 +57,10 @@ public class TransitionManager : MonoBehaviour
         color.a = startAlpha;
         image.color = color;
 
-        while (timer < length)
+        while (elapsed < length)
         {
-            timer += Time.deltaTime;
-            float t = timer / length;
+            elapsed += Time.unscaledDeltaTime;
+            float t = elapsed / length;
             color.a = Mathf.Lerp(startAlpha, endAlpha, t);
             image.color = color;
             yield return null;

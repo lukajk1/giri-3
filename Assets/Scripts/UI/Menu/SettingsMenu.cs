@@ -18,6 +18,7 @@ public class SettingsMenu : Menu
     [SerializeField] private TMP_Dropdown resolution;
 
     [SerializeField] private Toggle enableVSync;
+    [SerializeField] private Toggle enablePixellate;
 
 
     public static SettingsMenu i;
@@ -36,6 +37,7 @@ public class SettingsMenu : Menu
         resolution.onValueChanged.AddListener(ResolutionChanged);
 
         enableVSync.onValueChanged.AddListener(VSyncChanged);
+        enablePixellate.onValueChanged.AddListener(PixellateChanged);
     }
 
     private void Start()
@@ -119,6 +121,10 @@ public class SettingsMenu : Menu
     {
         QualitySettings.vSyncCount = value ? 1 : 0;
     }
+    private void PixellateChanged(bool value)
+    {
+        LowRes.i.SetLowRes(value);
+    }
 
     private void SaveAndClose()
     {
@@ -138,7 +144,8 @@ public class SettingsMenu : Menu
 
             WindowType = windowType.value,
             Resolution = resolution.value,
-            VSync = enableVSync.isOn
+            VSync = enableVSync.isOn,
+            Pixellate = enablePixellate.isOn
         };
     }
 
@@ -151,6 +158,7 @@ public class SettingsMenu : Menu
         windowType.value = data.WindowType;
         resolution.value = data.Resolution;
         enableVSync.isOn = data.VSync;
+        enablePixellate.isOn = data.Pixellate;
     }
 }
 
@@ -167,6 +175,7 @@ public class GameSettings
     public float MusicVolume;
 
     public bool VSync;
+    public bool Pixellate;
 
     // int type to use indices, just a bit easier
     public int WindowType;
@@ -180,6 +189,7 @@ public class GameSettings
         MusicVolume = 0.5f;
 
         VSync = false;
+        Pixellate = true;
         WindowType = 3;
         Resolution = 2;
     }

@@ -26,6 +26,6 @@ MonoBehaviour:
     AttackSpeedMult: 1.8
     CritChanceFlat: 0
     DamageFlat: 0
-    DamageMult: 1.15
+    DamageMult: 2
     CDR: 0
   ccEffectsToApply: 0100000019000000

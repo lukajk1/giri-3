@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlyrMovementAndAnimation : Unit_Movement
+public class PlyrMovementAndAnimation : UnitMovement
 {
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private MoveCursor moveCursor;
@@ -69,7 +69,7 @@ public class PlyrMovementAndAnimation : Unit_Movement
     {
         if (Input.GetButton("MoveClick"))
         {
-            if (RunUtilities.CursorToWorldPos(out Vector3 point))
+            if (RunUtil.CursorToWorldPos(out Vector3 point))
             {
                 moveCursor.MoveCommand(point);
                 WalkTo(point);

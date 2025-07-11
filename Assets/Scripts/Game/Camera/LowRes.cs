@@ -3,15 +3,19 @@ using UnityEngine;
 public class LowRes : MonoBehaviour
 {
     [SerializeField] private RenderTexture renderTexture;
-    [SerializeField] private bool enable;
+    public static LowRes i;
+
+    private void Awake()
+    {
+        i = this;
+    }
     private void Start()
     {
-        SetLowRes(enable);
-
         #if UNITY_EDITOR
+            SetLowRes(false);
         #else
-            SetLowRes(true);
         #endif
+
     }
 
     public void SetLowRes(bool value)

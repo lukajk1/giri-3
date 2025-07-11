@@ -10,6 +10,7 @@ public class Unit : Entity
     [SerializeField] protected WitchController controller;
 
     [HideInInspector] public bool Attackable = true;
+    [HideInInspector] public bool IsDead;
 
     #region fields for stats
     [HideInInspector] public int currentShield;
@@ -112,7 +113,7 @@ public class Unit : Entity
     #endregion
 
     #region combat methods
-    public void Damage(CombatData data)
+    public virtual void Damage(CombatData data)
     {
         if (currentDamage <= 0) return;
 
@@ -130,7 +131,7 @@ public class Unit : Entity
         CombatEventBus.TriggerUnitHealthChange(data);
         healthbar.RefreshHealthbar();
     }
-    public void Heal(CombatData data)
+    public virtual void Heal(CombatData data)
     {
         if (currentHealth == currentMaxHealth) return;
 
@@ -146,10 +147,13 @@ public class Unit : Entity
         healthbar.RefreshHealthbar();
     }
 
-    public void Die()
+    public virtual void Die()
     {
+        if (IsDead) return;
+
         OnDeath?.Invoke();
         Attackable = false;
+        IsDead = true;
         SoundManagerSO.PlaySoundFXClip(new SoundData(CombatList.i.unitDeath));
     }
     #endregion
