@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45aab90f7fd2f1449a20d9a0603521b, type: 3}
-  m_Name: W_Buff
+  m_Name: eivelRBuff
   m_EditorClassIdentifier: 
-  debugName: eivel w buff
-  Icon: {fileID: 21300000, guid: 1a98fb582ccbf31408b0afce75800dbe, type: 3}
+  debugName: eivel r buff
+  Icon: {fileID: 21300000, guid: 7522747e1d6dd064a94db780e62a59a0, type: 3}
   CustomLogic: {fileID: 0}
   IsIndefinite: 0
-  Duration: 6
+  Duration: 12
   statMod:
-    MoveSpeedFlat: 0
-    MoveSpeedMult: 1.3
+    MoveSpeedFlat: 0.5
+    MoveSpeedMult: 0
     ShieldFlat: 0
     MaxHealthFlat: 0
-    AttackRangeFlat: 3
-    AttackSpeedMult: 1.8
+    AttackRangeFlat: 0
+    AttackSpeedFlat: 0
+    AttackSpeedMult: 0
     CritChanceFlat: 0
     DamageFlat: 0
-    DamageMult: 2
+    DamageMult: 1.7
     CDR: 0
-  ccEffectsToApply: 0100000019000000
+  ccEffectsToApply: 

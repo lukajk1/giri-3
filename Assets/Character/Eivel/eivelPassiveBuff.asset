@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45aab90f7fd2f1449a20d9a0603521b, type: 3}
-  m_Name: eivelPassiveProc
+  m_Name: eivelPassiveBuff
   m_EditorClassIdentifier: 
   debugName: eivel passive proc
   Icon: {fileID: 0}
@@ -19,14 +19,14 @@ MonoBehaviour:
   Duration: 3
   statMod:
     MoveSpeedFlat: 0.7
-    MoveSpeedMult: 1
+    MoveSpeedMult: 0
     ShieldFlat: 0
     MaxHealthFlat: 0
     AttackRangeFlat: 0
-    AttackSpeedFlat: 0.3
-    AttackSpeedMult: 1
+    AttackSpeedFlat: 0
+    AttackSpeedMult: 0
     CritChanceFlat: 0
-    DamageFlat: 0
-    DamageMult: 1.5
+    DamageFlat: 40
+    DamageMult: 0
     CDR: 0
   ccEffectsToApply: 

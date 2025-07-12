@@ -49,7 +49,7 @@ public class AbilityIcon : MonoBehaviour
             float remaining = duration - elapsed;
             if (remaining > 3f)
             {
-                countdownText.text = Mathf.CeilToInt(remaining).ToString();
+                countdownText.text = Mathf.FloorToInt(remaining).ToString();
             }
             else
             {

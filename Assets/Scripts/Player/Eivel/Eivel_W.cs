@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class Eivel_W : AbilityImplementation
 {
-    [SerializeField] BuffData WBuff;
+    [SerializeField] BuffData wDebuff;
     public override void TryActivate()
     {
         if (UIAbility.CooldownUp())
         {
-            player.AddBuff(WBuff);
+            if (RunUtil.GetSelectedUnit(out Unit unit))
+            {
+                if (unit is Enemy)
+                {
+                    unit.AddBuff(wDebuff);
+                    Debug.Log("wow it actually worked");
+                }
+            }
             UIAbility.Activate(BaseCooldown);
         }
         else
         {
-            CooldownNotUpSound();
+            CooldownNotUp();
         }
     }
 }

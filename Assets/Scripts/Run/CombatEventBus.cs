@@ -34,7 +34,7 @@ public static class CombatEventBus
 {
     public static event Action<CombatData> OnCombatDataResolved;
 
-    public static void TriggerCombatDataResolved(CombatData damage)
+    public static void TriggerCombatResolved(CombatData damage)
     {
         OnCombatDataResolved?.Invoke(damage);
     }

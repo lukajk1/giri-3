@@ -50,18 +50,7 @@ public class RunUtil : MonoBehaviour
     public static bool CursorToWorldPos(out Vector3 worldPos)
     {
         Vector3 mousePos = Input.mousePosition;
-
-        if (Game.PixellateOn)
-        {
-            float scaleX = ScreenDownscaleSize.x / Screen.width;
-            float scaleY = ScreenDownscaleSize.y / Screen.height;
-
-            mousePos = new Vector3(
-                mousePos.x * scaleX,
-                mousePos.y * scaleY,
-                0f
-            );
-        }
+        mousePos = NormalizeCursorPos(mousePos);
 
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
@@ -76,6 +65,49 @@ public class RunUtil : MonoBehaviour
         {
             worldPos = Vector3.zero;
             return false;
+        }
+    }
+    public static bool GetSelectedUnit(out Unit unit)
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = NormalizeCursorPos(mousePos);
+
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+        Collider collider;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            collider = hit.collider;
+            unit = collider.GetComponent<Unit>();
+
+            if (unit != null) return true; 
+            else return false;
+        }
+        else
+        {
+            collider = null;
+            unit = null;
+            return false;
+        }
+    }
+
+    private static Vector3 NormalizeCursorPos(Vector3 mousePos)
+    {
+        if (Game.PixellateOn)
+        {
+            float scaleX = ScreenDownscaleSize.x / Screen.width;
+            float scaleY = ScreenDownscaleSize.y / Screen.height;
+
+            return new Vector3(
+                mousePos.x * scaleX,
+                mousePos.y * scaleY,
+                0f
+            );
+        }
+        else
+        {
+            return mousePos;
         }
     }
 

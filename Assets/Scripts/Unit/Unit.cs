@@ -28,10 +28,13 @@ public class Unit : Entity
     #endregion
 
     protected List<BuffData> buffList = new();
+    public List<UnitState> stateList = new();
     //private List<ItemData> itemList;  -> in the future probably use something like this to calculate items
 
     public Action OnStatsModified;
-    public Action<CombatData> OnDamageTaken;
+    public Action OnStateListModified;
+    public Action<CombatData> OnCombatEventInitiated;
+    public Action<CombatData> OnCombatEventResolved;
     public Action OnDeath;
     protected virtual void Start()
     {
@@ -44,7 +47,17 @@ public class Unit : Entity
     public virtual void AddBuff(BuffData buff)
     {
         buffList.Add(buff);
+        AddStates(buff);
         RefreshStats();
+    }
+
+    private void AddStates(BuffData buff)
+    {
+        foreach (UnitState state in buff.StateEffectsToApply)
+        {
+            stateList.Add(state);
+        }
+        OnStateListModified?.Invoke();
     }
 
     /// <summary>
@@ -103,9 +116,10 @@ public class Unit : Entity
 
             currentCooldownReduction += buff.statMod.CDR;
 
-            moveSpeedMult *= buff.statMod.MoveSpeedMult;
-            damageMult *= buff.statMod.DamageMult;
-            attackSpeedMult *= buff.statMod.AttackSpeedMult;
+            // add 1 since 0.4 mult = 40% extra (140%)
+            moveSpeedMult *= 1f + buff.statMod.MoveSpeedMult;
+            damageMult *= 1f + buff.statMod.DamageMult;
+            attackSpeedMult *= 1f + buff.statMod.AttackSpeedMult;
         }
 
         currentMoveSpeed *= moveSpeedMult;
@@ -120,7 +134,11 @@ public class Unit : Entity
     #region combat methods
     public virtual void Damage(CombatData data)
     {
-        if (currentDamage <= 0) return;
+        OnCombatEventInitiated?.Invoke(data);
+
+        if (data.damage <= 0) return;
+        if (stateList.Contains(UnitState.Wraithed) 
+            || stateList.Contains(UnitState.Invulnerable)) return;
 
         currentHealth -= data.damage;
 
@@ -130,10 +148,10 @@ public class Unit : Entity
         }
         else
         {
-            OnDamageTaken?.Invoke(data);
+            OnCombatEventResolved?.Invoke(data);
         }
 
-        CombatEventBus.TriggerCombatDataResolved(data);
+        CombatEventBus.TriggerCombatResolved(data);
         healthbar.RefreshHealthbar();
     }
     public virtual void Heal(CombatData data)
@@ -148,7 +166,7 @@ public class Unit : Entity
         else currentHealth = tentative;
 
         SoundManagerSO.PlaySoundFXClip(new SoundData(CombatList.i.heal));
-        CombatEventBus.TriggerCombatDataResolved(data);
+        CombatEventBus.TriggerCombatResolved(data);
         healthbar.RefreshHealthbar();
     }
 

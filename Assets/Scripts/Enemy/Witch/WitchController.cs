@@ -31,7 +31,8 @@ public class WitchController : EnemyController
         this.unit = unit; 
         
         unit.OnDeath += OnDeath;
-        unit.OnDamageTaken += OnDamageTaken;
+        unit.OnCombatEventResolved += OnDamageTaken;
+        unit.OnStateListModified += OnStateListModified;
 
         currentState = idleState;
         currentState.Enter();
@@ -40,7 +41,7 @@ public class WitchController : EnemyController
     private void OnDisable()
     {
         unit.OnDeath -= OnDeath;
-        unit.OnDamageTaken -= OnDamageTaken;
+        unit.OnCombatEventResolved -= OnDamageTaken;
     }
     #endregion
 
@@ -66,8 +67,13 @@ public class WitchController : EnemyController
 
         attackCooldown = null;
     }
+    private void OnStateListModified()
+    {
+        if (unit.stateList.Contains(UnitState.Rooted))
+        {
 
-    #region combat
+        }
+    }
     protected void OnDamageTaken(CombatData data) { }
     protected override void OnDeath()
     {
@@ -81,5 +87,5 @@ public class WitchController : EnemyController
             RunUtil.i.DelayAndCallbackCR(RunUtil.AnimFramesToSecs(deathFrames) + 0.9f, () => Destroy(unit.gameObject))
             );
     }
-    #endregion
+
 }

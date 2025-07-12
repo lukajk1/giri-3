@@ -1,4 +1,6 @@
-# ignore assets I don't potentially have rights to distribute
+# may not have rights to distribute
+/Assets/NaughtyAttributes/
+/Assets/Verpha/
 /Assets/Sound/
 /Assets/Feel/
 

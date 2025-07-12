@@ -2,26 +2,22 @@ using UnityEngine;
 
 public class PlyrAbilities : MonoBehaviour
 {
-    [SerializeField] AbilityIcon Q_Icon;
-    [SerializeField] AbilityIcon W_Icon;
-    [SerializeField] AbilityIcon E_Icon;
-    [SerializeField] AbilityIcon R_Icon;
-
     [SerializeField] AbilityImplementation Q_Spell;
     [SerializeField] AbilityImplementation W_Spell;
     [SerializeField] AbilityImplementation E_Spell;
     [SerializeField] AbilityImplementation R_Spell;
     public void Init(Player player)
     {
-        Q_Spell.Init(player, Q_Icon);   
-        W_Spell.Init(player, W_Icon);   
-        E_Spell.Init(player, E_Icon);   
-        R_Spell.Init(player, R_Icon);
+        UIAbilities ui = UIAbilities.i;
+        Q_Spell.Init(player, ui.Q_Icon);   
+        W_Spell.Init(player, ui.W_Icon);   
+        E_Spell.Init(player, ui.E_Icon);   
+        R_Spell.Init(player, ui.R_Icon);
 
-        Q_Icon.Init(Q_Spell.abilityIcon, "Q");
-        W_Icon.Init(W_Spell.abilityIcon, "W");
-        E_Icon.Init(E_Spell.abilityIcon, "E");
-        R_Icon.Init(R_Spell.abilityIcon, "R");
+        ui.Q_Icon.Init(Q_Spell.abilityIcon, "Q");
+        ui.W_Icon.Init(W_Spell.abilityIcon, "W");
+        ui.E_Icon.Init(E_Spell.abilityIcon, "E");
+        ui.R_Icon.Init(R_Spell.abilityIcon, "R");
     }
     private void Update()
     {

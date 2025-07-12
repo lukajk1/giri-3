@@ -29,7 +29,7 @@ public class LowRes : MonoBehaviour
 
     public void SetLowRes(bool value)
     {
-        Debug.Log("set res to " + value);
+        //Debug.Log("set res to " + value);
         if (value)
         {
             Camera.main.targetTexture = renderTexture;
